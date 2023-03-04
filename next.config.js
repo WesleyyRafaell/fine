@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+	reactStrictMode: true,
+	styledComponents: true
 }
 
 module.exports = nextConfig
