@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 
   ${({ theme }) => css`
 		html {
-			background: ${theme.colors.secondary};
+			/* background: ${theme.colors.secondary}; */
 		}
 	`}
 
