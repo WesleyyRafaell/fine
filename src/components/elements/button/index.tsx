@@ -1,9 +1,16 @@
+import { ButtonHTMLAttributes } from 'react'
 import * as S from './style'
 
-const Button = () => {
+type ButtonTypes = ButtonHTMLAttributes<HTMLButtonElement>
+
+type ButtonProps = {
+	children: string
+} & ButtonTypes
+
+const Button = ({ children }: ButtonProps) => {
 	return (
 		<S.Button>
-			<p>Button</p>
+			<p>{children}</p>
 		</S.Button>
 	)
 }

@@ -4,7 +4,10 @@ import Button from '.'
 
 const meta: Meta<typeof Button> = {
 	title: 'Button',
-	component: Button
+	component: Button,
+	args: {
+		children: 'Novo controle'
+	}
 }
 
 export default meta
