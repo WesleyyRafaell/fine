@@ -1,6 +1,30 @@
 import { createGlobalStyle, css } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+	@font-face {
+		font-display: swap;
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 100;
+		src: url('/fonts/inter-v12-latin-100.woff2') format('woff2')
+	}
+
+	@font-face {
+		font-display: swap;
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 300;
+		src: url('/fonts/inter-v12-latin-300.woff2') format('woff2')
+	}
+
+	@font-face {
+		font-display: swap;
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 600;
+		src: url('/fonts/inter-v12-latin-600.woff2') format('woff2')
+	}
+
  * {
     margin: 0;
     padding: 0;
@@ -16,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
 
   ${({ theme }) => css`
 		html {
-			/* background: ${theme.colors.secondary}; */
+			font-family: 'Inter', Arial, Helvetica, sans-serif;
 		}
 	`}
 
