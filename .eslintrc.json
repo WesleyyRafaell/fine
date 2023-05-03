@@ -25,6 +25,7 @@
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/react-in-jsx-scope": "off",
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+				"@typescript-eslint/no-non-null-assertion": "off"
     }
 }
