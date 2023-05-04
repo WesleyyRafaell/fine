@@ -8,7 +8,7 @@ export default {
 		radius: '0.4rem'
 	},
 	font: {
-		family: '',
+		family: 'Inter, Arial, Helvetica, sans-serif',
 		light: 300,
 		normal: 400,
 		bold: 600,

@@ -40,7 +40,12 @@ const GlobalStyle = createGlobalStyle`
 
   ${({ theme }) => css`
 		html {
-			font-family: 'Inter', Arial, Helvetica, sans-serif;
+			font-size: 62.5%;
+		}
+
+		body {
+			font-family: ${theme.font.family};
+			font-size: ${theme.font.sizes.medium};
 		}
 	`}
 
