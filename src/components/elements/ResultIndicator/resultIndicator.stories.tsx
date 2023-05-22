@@ -10,6 +10,9 @@ const meta: Meta<typeof ResultIndicator> = {
 			options: ['red', 'green', 'orange'],
 			control: { type: 'radio' }
 		}
+	},
+	parameters: {
+		backgrounds: { default: 'dark' }
 	}
 }
 

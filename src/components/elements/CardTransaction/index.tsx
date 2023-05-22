@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import * as S from './style'
 import Image from 'next/image'
 
@@ -33,14 +34,21 @@ const opacityMotion = {
 }
 
 const CardTransaction = ({ type, name, value }: CardTransactionProps) => {
+	const [enableCard, setEnableCard] = useState<boolean>(true)
+
+	const toogleCard = () => {
+		setEnableCard(!enableCard)
+	}
+
 	return (
 		<S.Container
 			variants={containerMotion}
 			initial="rest"
 			whileHover="hover"
 			animate="rest"
+			enableCard={enableCard}
 		>
-			<S.TypeTransaction type={type} />
+			<S.TypeTransaction type={type} enableCard={enableCard} />
 			<S.Content>
 				<S.HeaderContent variants={opacityMotion}>
 					<S.Wrapper>
@@ -55,20 +63,38 @@ const CardTransaction = ({ type, name, value }: CardTransactionProps) => {
 				<S.FooterContent variants={opacityMotion}>
 					<S.Wrapper>
 						<S.ImageButton>
-							<Image
-								src="/icons/trashIcon.png"
-								width={24}
-								height={24}
-								alt="Trash icon"
-							/>
+							{enableCard ? (
+								<Image
+									src="/icons/trashIcon.png"
+									width={24}
+									height={24}
+									alt="Trash icon"
+								/>
+							) : (
+								<Image
+									src="/icons/trashLight.png"
+									width={24}
+									height={24}
+									alt="Trash icon"
+								/>
+							)}
 						</S.ImageButton>
-						<S.ImageButton>
-							<Image
-								src="/icons/disableIcon.png"
-								width={24}
-								height={24}
-								alt="Disable Icon"
-							/>
+						<S.ImageButton onClick={toogleCard}>
+							{enableCard ? (
+								<Image
+									src="/icons/disableIcon.png"
+									width={22}
+									height={22}
+									alt="Disable Icon"
+								/>
+							) : (
+								<Image
+									src="/icons/enable.png"
+									width={24}
+									height={24}
+									alt="Disable Icon"
+								/>
+							)}
 						</S.ImageButton>
 					</S.Wrapper>
 				</S.FooterContent>

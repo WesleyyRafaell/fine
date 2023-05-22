@@ -1,10 +1,17 @@
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 import { CardTransactionProps } from '.'
+import { darken } from 'polished'
 
-export const Container = styled(motion.div)`
-	${({ theme }) => css`
-		background-color: ${theme.colors.lightBlue};
+type ContainerProps = {
+	enableCard: boolean
+}
+
+export const Container = styled(motion.div)<ContainerProps>`
+	${({ theme, enableCard }) => css`
+		background-color: ${enableCard
+			? theme.colors.lightBlue
+			: theme.colors.darkBlue};
 		max-width: 47rem;
 		height: 7.2rem;
 		border-radius: 27px;
@@ -19,9 +26,16 @@ export const Container = styled(motion.div)`
 	`}
 `
 
-export const TypeTransaction = styled.div<Pick<CardTransactionProps, 'type'>>`
-	${({ theme, type }) => css`
-		background-color: ${theme.colors[type]};
+type TypeTransactionProps = {
+	enableCard: boolean
+} & Pick<CardTransactionProps, 'type'>
+
+export const TypeTransaction = styled.div<TypeTransactionProps>`
+	${({ theme, type, enableCard }) => css`
+		/* background-color: ${theme.colors[type]}; */
+		background-color: ${enableCard
+			? theme.colors[type]
+			: darken(0.1, theme.colors[type])};
 		height: 100%;
 		width: 2.1rem;
 		margin-right: 1.5rem;
@@ -72,6 +86,8 @@ export const ImageButton = styled.button`
 	background: transparent;
 	border: none;
 	cursor: pointer;
+	width: 24px;
+	height: 27px;
 `
 
 export const FooterContent = styled(motion.div)`

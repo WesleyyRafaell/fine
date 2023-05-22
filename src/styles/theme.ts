@@ -31,10 +31,13 @@ export default {
 		black: '#030517',
 		lightGray: '#EAEAEA',
 		lightBlue: '#757EFF',
+		darkBlue: '#5f65c5',
 		gray: '#8F8F8F',
 		darkGray: '#2E2F42',
 		green: '#21BE3A',
+		darkGreen: '#1B9C30',
 		red: '#DD4747',
+		darkRed: '#A43232',
 		orange: '#CF815F'
 	},
 	spacings: {
