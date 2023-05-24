@@ -4,14 +4,15 @@ import CardTransaction from '.'
 
 const meta: Meta<typeof CardTransaction> = {
 	title: 'CardTransaction',
-	component: CardTransaction,
-	argTypes: {
-		type: {
-			options: ['red', 'green'],
-			control: { type: 'radio' }
-		}
-	}
+	component: CardTransaction
 }
+
+// argTypes: {
+// 	type: {
+// 		options: ['red', 'green'],
+// 		control: { type: 'radio' }
+// 	}
+// }
 
 export default meta
 
@@ -19,7 +20,6 @@ type Story = StoryObj<typeof CardTransaction>
 
 export const Default: Story = {
 	args: {
-		type: 'green',
 		name: 'Luz',
 		value: 'R$ 250,00'
 	}
