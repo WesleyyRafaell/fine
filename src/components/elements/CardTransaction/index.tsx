@@ -53,24 +53,31 @@ const CardTransaction = ({ name, value }: CardTransactionProps) => {
 			whileHover="hover"
 			animate="rest"
 			enableCard={enableCard}
+			data-testid="card"
 		>
-			<S.TypeTransaction type={typeCard} enableCard={enableCard} />
+			<S.TypeTransaction
+				data-testid="cardType"
+				type={typeCard}
+				enableCard={enableCard}
+			/>
 			<S.Content>
 				<S.HeaderContent variants={opacityMotion}>
 					<S.Wrapper>
 						<S.CircleButton
 							onClick={() => handleChangeTypeCard('red')}
 							color="red"
+							data-testid="buttonRed"
 						/>
 						<S.CircleButton
 							onClick={() => handleChangeTypeCard('green')}
 							color="green"
+							data-testid="buttonGreen"
 						/>
 					</S.Wrapper>
 				</S.HeaderContent>
 				<S.MainContent>
 					<S.Text>{name}</S.Text>
-					<S.Text>{value}</S.Text>
+					<S.Text>R$ {value}</S.Text>
 				</S.MainContent>
 				<S.FooterContent variants={opacityMotion}>
 					<S.Wrapper>
@@ -91,7 +98,7 @@ const CardTransaction = ({ name, value }: CardTransactionProps) => {
 								/>
 							)}
 						</S.ImageButton>
-						<S.ImageButton onClick={toogleCard}>
+						<S.ImageButton data-testid="buttonDisableCard" onClick={toogleCard}>
 							{enableCard ? (
 								<Image
 									src="/icons/disableIcon.png"

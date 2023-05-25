@@ -21,6 +21,6 @@ type Story = StoryObj<typeof CardTransaction>
 export const Default: Story = {
 	args: {
 		name: 'Luz',
-		value: 'R$ 250,00'
+		value: '250,00'
 	}
 }
