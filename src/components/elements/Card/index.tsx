@@ -29,10 +29,16 @@ const textMotion = {
 
 const Card = () => {
 	return (
-		<S.Container initial="rest" whileHover="hover" animate="rest">
-			<S.Card variants={cardMotion}>
+		<S.Container>
+			<S.Card
+				variants={cardMotion}
+				initial="rest"
+				whileHover="hover"
+				animate="rest"
+				data-testid="Card"
+			>
 				<S.Text>Fevereiro</S.Text>
-				<S.ContainerIcon variants={textMotion}>
+				<S.ContainerIcon variants={textMotion} data-testid="ContainerIcon">
 					<S.BoxIcon>
 						<TrashBlueIcon />
 					</S.BoxIcon>
