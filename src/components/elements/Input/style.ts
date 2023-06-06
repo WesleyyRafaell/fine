@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { InputProps } from '.'
 
 export const Container = styled.div`
 	display: flex;
@@ -16,13 +17,16 @@ export const ContainerInput = styled.div`
 	display: flex;
 `
 
-export const Input = styled.input`
-	width: 17.9rem;
-	background: none;
-	border: none;
-	font-size: 1.6rem;
-	outline: none;
-	color: #ffffffbd;
+export const Input = styled.input<Pick<InputProps, 'inputSize'>>`
+	${({ theme, inputSize }) => css`
+		width: ${inputSize === 'regular' ? '17.9rem' : '7.9rem'};
+		background: none;
+		border: none;
+		font-size: 1.6rem;
+		outline: none;
+		color: ${theme.colors.white};
+		font-weight: ${theme.font.bold};
+	`}
 `
 export const MoneySymbol = styled.p`
 	${({ theme }) => css`

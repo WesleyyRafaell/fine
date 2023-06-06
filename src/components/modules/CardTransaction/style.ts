@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
-import { CardTransactionProps } from '.'
+import { TypeCardProps } from '.'
 import { darken } from 'polished'
 
 type ContainerProps = {
@@ -28,11 +28,11 @@ export const Container = styled(motion.div)<ContainerProps>`
 
 type TypeTransactionProps = {
 	enableCard: boolean
-} & Pick<CardTransactionProps, 'type'>
+	type: TypeCardProps
+}
 
 export const TypeTransaction = styled.div<TypeTransactionProps>`
 	${({ theme, type, enableCard }) => css`
-		/* background-color: ${theme.colors[type]}; */
 		background-color: ${enableCard
 			? theme.colors[type]
 			: darken(0.1, theme.colors[type])};

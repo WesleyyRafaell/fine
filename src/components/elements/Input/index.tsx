@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import * as S from './style'
 import { formatCurrency } from '@/utils/formatCurrency'
 
@@ -6,14 +6,18 @@ export type InputProps = {
 	money?: boolean
 	labelName?: string
 	placeholder?: string
+	initialValue?: string
+	inputSize?: 'small' | 'regular'
 }
 
-const Input = ({ money = false, labelName, placeholder = '' }: InputProps) => {
-	const [inputValue, setInputValue] = useState('')
-
-	useEffect(() => {
-		setInputValue('')
-	}, [money])
+const Input = ({
+	money = false,
+	labelName,
+	placeholder = '',
+	initialValue = '',
+	inputSize = 'regular'
+}: InputProps) => {
+	const [inputValue, setInputValue] = useState(initialValue)
 
 	const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
 		const value = event.currentTarget.value
@@ -39,7 +43,8 @@ const Input = ({ money = false, labelName, placeholder = '' }: InputProps) => {
 							onChange={handleInputChange}
 							id="input"
 							placeholder={placeholder}
-							value={inputValue}
+							value={formatCurrency(inputValue)}
+							inputSize={inputSize}
 						/>
 					</>
 				) : (
@@ -49,6 +54,7 @@ const Input = ({ money = false, labelName, placeholder = '' }: InputProps) => {
 						id="input"
 						placeholder={placeholder}
 						value={inputValue}
+						inputSize={inputSize}
 					/>
 				)}
 			</S.ContainerInput>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import * as S from './style'
 import Image from 'next/image'
+import Input from '../../elements/Input'
 
 export type CardTransactionProps = {
 	name: string
@@ -76,8 +77,8 @@ const CardTransaction = ({ name, value }: CardTransactionProps) => {
 					</S.Wrapper>
 				</S.HeaderContent>
 				<S.MainContent>
-					<S.Text>{name}</S.Text>
-					<S.Text>R$ {value}</S.Text>
+					<Input initialValue={name} inputSize="small" />
+					<Input initialValue={value} inputSize="small" money />
 				</S.MainContent>
 				<S.FooterContent variants={opacityMotion}>
 					<S.Wrapper>
