@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { TypeCardProps } from '.'
 import { darken } from 'polished'
 
+import * as InputStyles from '@/components/elements/Input/style'
+
 type ContainerProps = {
 	enableCard: boolean
 }
@@ -19,6 +21,14 @@ export const Container = styled(motion.div)<ContainerProps>`
 		align-items: center;
 		overflow: hidden;
 		padding-right: 2.8rem;
+
+		${InputStyles.Input} {
+			color: ${!enableCard ? '#ffffff8c' : theme.colors.white};
+		}
+
+		${InputStyles.MoneySymbol} {
+			color: ${!enableCard ? '#ffffff8c' : theme.colors.white};
+		}
 
 		> p:nth-child(2) {
 			flex: 1;

@@ -26,6 +26,10 @@ export const Input = styled.input<Pick<InputProps, 'inputSize'>>`
 		outline: none;
 		color: ${theme.colors.white};
 		font-weight: ${theme.font.bold};
+
+		::placeholder {
+			color: #ffffff7d;
+		}
 	`}
 `
 export const MoneySymbol = styled.p`

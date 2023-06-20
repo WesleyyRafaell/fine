@@ -10,7 +10,7 @@ export const Card = styled(motion.div)`
 		border-radius: 12px;
 		text-align: center;
 		padding-top: 27px;
-		background-color: ${theme.colors.secondary};
+		background-color: ${theme.colors.orange};
 	`}
 `
 
