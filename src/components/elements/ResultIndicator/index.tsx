@@ -7,7 +7,7 @@ export type ResultIndicatorProps = {
 }
 
 const ResultIndicator = ({
-	text = 'Receitas',
+	text,
 	total = '0',
 	moneySignColor = 'orange'
 }: ResultIndicatorProps) => {
