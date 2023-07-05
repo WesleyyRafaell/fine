@@ -4,7 +4,10 @@ import DisplayResults from '.'
 
 const meta: Meta<typeof DisplayResults> = {
 	title: 'DisplayResults',
-	component: DisplayResults
+	component: DisplayResults,
+	parameters: {
+		backgrounds: { default: 'dark' }
+	}
 }
 
 export default meta
