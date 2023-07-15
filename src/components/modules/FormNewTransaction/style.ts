@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
 	${({ theme }) => css`
 		background-color: ${theme.colors.orange};
-		max-width: 47rem;
+		width: 47rem;
 		border-radius: 2.7rem;
 		height: 16.3rem;
 		display: flex;

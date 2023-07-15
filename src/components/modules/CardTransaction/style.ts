@@ -14,7 +14,7 @@ export const Container = styled(motion.div)<ContainerProps>`
 		background-color: ${enableCard
 			? theme.colors.lightBlue
 			: theme.colors.darkBlue};
-		max-width: 47rem;
+		width: 47rem;
 		height: 7.2rem;
 		border-radius: 27px;
 		display: flex;

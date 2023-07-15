@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-	max-width: 47rem;
+	width: 47rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
