@@ -13,6 +13,7 @@ const Home = () => {
 						<Card />
 						<Card />
 						<Card />
+						<Card />
 					</S.CardsContainer>
 				</S.Box>
 				<S.Box>

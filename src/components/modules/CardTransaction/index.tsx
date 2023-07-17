@@ -36,7 +36,7 @@ const opacityMotion = {
 }
 
 const CardTransaction = ({ name, value }: CardTransactionProps) => {
-	const [enableCard, setEnableCard] = useState<boolean>(true)
+	const [enableCard, setEnableCard] = useState(true)
 	const [typeCard, setTypeCard] = useState<TypeCardProps>('green')
 
 	const toogleCard = () => {
@@ -53,13 +53,13 @@ const CardTransaction = ({ name, value }: CardTransactionProps) => {
 			initial="rest"
 			whileHover="hover"
 			animate="rest"
-			enableCard={enableCard}
+			enablecardcontainer={+enableCard}
 			data-testid="card"
 		>
 			<S.TypeTransaction
 				data-testid="cardType"
 				type={typeCard}
-				enableCard={enableCard}
+				enable={enableCard}
 			/>
 			<S.Content>
 				<S.HeaderContent variants={opacityMotion}>

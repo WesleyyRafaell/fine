@@ -34,7 +34,7 @@ export const CardsContainer = styled.div`
 	flex-wrap: wrap;
 
 	${CardStyle.Container} {
-		margin: 1rem;
+		margin: 0 1rem 1rem 0;
 	}
 
 	display: flex;

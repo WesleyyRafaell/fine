@@ -6,12 +6,12 @@ import { darken } from 'polished'
 import * as InputStyles from '@/components/elements/Input/style'
 
 type ContainerProps = {
-	enableCard: boolean
+	enablecardcontainer: number
 }
 
 export const Container = styled(motion.div)<ContainerProps>`
-	${({ theme, enableCard }) => css`
-		background-color: ${enableCard
+	${({ theme, enablecardcontainer }) => css`
+		background-color: ${enablecardcontainer
 			? theme.colors.lightBlue
 			: theme.colors.darkBlue};
 		width: 47rem;
@@ -23,11 +23,11 @@ export const Container = styled(motion.div)<ContainerProps>`
 		padding-right: 2.8rem;
 
 		${InputStyles.Input} {
-			color: ${!enableCard ? '#ffffff8c' : theme.colors.white};
+			color: ${!enablecardcontainer ? '#ffffff8c' : theme.colors.white};
 		}
 
 		${InputStyles.MoneySymbol} {
-			color: ${!enableCard ? '#ffffff8c' : theme.colors.white};
+			color: ${!enablecardcontainer ? '#ffffff8c' : theme.colors.white};
 		}
 
 		> p:nth-child(2) {
@@ -37,13 +37,13 @@ export const Container = styled(motion.div)<ContainerProps>`
 `
 
 type TypeTransactionProps = {
-	enableCard: boolean
+	enable: boolean
 	type: TypeCardProps
 }
 
 export const TypeTransaction = styled.div<TypeTransactionProps>`
-	${({ theme, type, enableCard }) => css`
-		background-color: ${enableCard
+	${({ theme, type, enable }) => css`
+		background-color: ${enable
 			? theme.colors[type]
 			: darken(0.1, theme.colors[type])};
 		height: 100%;
