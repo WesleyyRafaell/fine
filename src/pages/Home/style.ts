@@ -3,7 +3,7 @@ import * as CardStyle from '@/components/elements/Card/style'
 
 export const Container = styled.div`
 	${({ theme }) => css`
-		background-color: ${theme.colors.darkBlue};
+		background-color: ${theme.colors.blue};
 		padding: 5rem;
 		min-height: 100vh;
 	`}

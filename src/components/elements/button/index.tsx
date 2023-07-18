@@ -5,11 +5,12 @@ type ButtonTypes = ButtonHTMLAttributes<HTMLButtonElement>
 
 type ButtonProps = {
 	children: string
+	passFunction: () => void
 } & ButtonTypes
 
-const Button = ({ children }: ButtonProps) => {
+const Button = ({ children, passFunction }: ButtonProps) => {
 	return (
-		<S.Button>
+		<S.Button onClick={passFunction}>
 			<p>{children}</p>
 		</S.Button>
 	)

@@ -27,7 +27,11 @@ const textMotion = {
 	}
 }
 
-const Card = () => {
+export type CardProps = {
+	name: string
+}
+
+const Card = ({ name = 'Fevereiro' }: CardProps) => {
 	return (
 		<S.Container>
 			<S.Card
@@ -37,7 +41,7 @@ const Card = () => {
 				animate="rest"
 				data-testid="Card"
 			>
-				<S.Text>Fevereiro</S.Text>
+				<S.Text>{name}</S.Text>
 				<S.ContainerIcon variants={textMotion} data-testid="ContainerIcon">
 					<S.BoxIcon>
 						<TrashBlueIcon />
