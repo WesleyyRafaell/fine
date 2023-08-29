@@ -1,6 +1,7 @@
 import ResultIndicator from '@/components/elements/ResultIndicator'
 import * as S from './style'
 import Input from '@/components/elements/Input'
+import { useControl } from '@/hooks/useControl'
 
 type DisplayResultsProps = {
 	total: string
@@ -9,11 +10,15 @@ type DisplayResultsProps = {
 }
 
 const DisplayResults = ({ total, expense, income }: DisplayResultsProps) => {
+	const {
+		selectedControl: { name }
+	} = useControl()
 	return (
 		<S.Container>
 			<S.ContainerForm>
 				<Input
-					labelName="Nome do controle"
+					labelName="Nome do controle:"
+					initialValue={name}
 					placeholder="Ex: controle fevereiro"
 				/>
 			</S.ContainerForm>

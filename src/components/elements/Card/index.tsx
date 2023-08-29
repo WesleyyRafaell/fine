@@ -28,12 +28,17 @@ const textMotion = {
 }
 
 export type CardProps = {
+	id: string
 	name: string
 }
 
-const Card = ({ name = 'Fevereiro' }: CardProps) => {
+const Card = ({ id, name = 'Novo controle' }: CardProps) => {
+	const handleClickSelectCard = () => {
+		console.log(`iddd`, id)
+	}
+
 	return (
-		<S.Container>
+		<S.Container onClick={handleClickSelectCard}>
 			<S.Card
 				variants={cardMotion}
 				initial="rest"

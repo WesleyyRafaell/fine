@@ -15,7 +15,7 @@ const ResultIndicator = ({
 		<S.Container>
 			<S.Text>{text}</S.Text>
 			<S.MoneySign moneySignColor={moneySignColor}>R$</S.MoneySign>
-			<S.Number>{total}</S.Number>
+			<S.Number data-testid="DisplayValue">{total}</S.Number>
 		</S.Container>
 	)
 }

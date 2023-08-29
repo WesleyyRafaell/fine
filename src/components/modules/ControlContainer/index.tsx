@@ -1,14 +1,24 @@
+import { useControl } from '@/hooks/useControl'
 import CardTransaction from '../CardTransaction'
 import DisplayResults from '../DisplayResults'
 import FormNewTransaction from '../FormNewTransaction'
 import * as S from './style'
 
 const ControlContainer = () => {
+	const {
+		selectedControl: { values, transactions }
+	} = useControl()
 	return (
 		<S.Container>
-			<DisplayResults total="600" income="900" expense="300" />
-			<CardTransaction name="luz" value="250" />
-			<CardTransaction name="luz" value="250" />
+			<DisplayResults
+				total={values.total}
+				income={values.income}
+				expense={values.expense}
+			/>
+			{transactions?.map(({ id, name, value }) => (
+				<CardTransaction key={id} name={name} value={value} />
+			))}
+
 			<FormNewTransaction />
 		</S.Container>
 	)
