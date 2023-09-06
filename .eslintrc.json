@@ -13,6 +13,9 @@
     "overrides": [],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+          },
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
@@ -22,10 +25,21 @@
         "react-hooks"
     ],
     "rules": {
+        "prettier/prettier": [
+            "warn",
+            {
+              "printWidth": 80,
+              "tabWidth": 2,
+              "singleQuote": true,
+              "trailingComma": "all",
+              "arrowParens": "always",
+              "semi": false,
+              "endOfLine": "auto"
+            }
+          ],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/react-in-jsx-scope": "off",
-        "prettier/prettier": "error",
-				"@typescript-eslint/no-non-null-assertion": "off"
+		"@typescript-eslint/no-non-null-assertion": "off"
     }
 }

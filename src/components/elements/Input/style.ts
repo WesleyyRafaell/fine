@@ -40,3 +40,12 @@ export const MoneySymbol = styled.p`
 		margin-right: 0.8rem;
 	`}
 `
+
+export const ErrorLabel = styled.p`
+	${({ theme }) => css`
+		color: ${theme.colors.darkRed};
+		font-weight: ${theme.font.bold};
+		font-size: 1.1563rem;
+		margin-top: 0.3375rem;
+	`}
+`

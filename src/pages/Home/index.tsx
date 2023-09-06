@@ -19,12 +19,12 @@ const Home = () => {
 			values: {
 				total: '0',
 				income: '0',
-				expense: '0'
+				expense: '0',
 			},
-			transactions: []
+			transactions: [],
 		}
 
-		console.log(`control`, control)
+		// console.log(`control`, control)
 		addControl(control)
 		setSelectedControl(control)
 	}

@@ -6,8 +6,9 @@ import * as S from './style'
 
 const ControlContainer = () => {
 	const {
-		selectedControl: { values, transactions }
+		selectedControl: { values, transactions },
 	} = useControl()
+
 	return (
 		<S.Container>
 			<DisplayResults

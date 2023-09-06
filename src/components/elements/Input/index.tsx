@@ -1,34 +1,33 @@
-import { useState } from 'react'
+import { InputHTMLAttributes, useId } from 'react'
+import { useForm } from 'react-hook-form'
+
 import * as S from './style'
-import { formatCurrency } from '@/utils/formatCurrency'
 
 export type InputProps = {
 	money?: boolean
 	labelName?: string
-	placeholder?: string
-	initialValue?: string
 	inputSize?: 'small' | 'regular'
-}
+	error: string | undefined
+} & InputHTMLAttributes<HTMLInputElement>
 
 const Input = ({
+	name = '',
 	money = false,
 	labelName,
 	placeholder = '',
-	initialValue = '',
-	inputSize = 'regular'
+	inputSize = 'regular',
+	error,
+	...rest
 }: InputProps) => {
-	const [inputValue, setInputValue] = useState(initialValue)
+	const inputId = useId()
 
-	const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-		const value = event.currentTarget.value
+	const { register } = useForm()
 
-		if (money) {
-			const moneyValueFormatted = formatCurrency(value)
-			setInputValue(moneyValueFormatted)
-			return
-		}
-
-		setInputValue(value)
+	const propsInput = {
+		...(name && { ...register(name) }),
+		...rest,
+		id: inputId,
+		value: rest?.value,
 	}
 
 	return (
@@ -40,24 +39,21 @@ const Input = ({
 						<S.MoneySymbol>R$</S.MoneySymbol>
 						<S.Input
 							type="text"
-							onChange={handleInputChange}
-							id="input"
 							placeholder={placeholder}
-							value={formatCurrency(inputValue)}
 							inputSize={inputSize}
+							{...propsInput}
 						/>
 					</>
 				) : (
 					<S.Input
 						type="text"
-						onChange={handleInputChange}
-						id="input"
 						placeholder={placeholder}
-						value={inputValue}
 						inputSize={inputSize}
+						{...propsInput}
 					/>
 				)}
 			</S.ContainerInput>
+			{error && <S.ErrorLabel>{error}</S.ErrorLabel>}
 		</S.Container>
 	)
 }

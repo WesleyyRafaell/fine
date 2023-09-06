@@ -36,11 +36,11 @@ export const useControl = create<ControlsProps>((set) => ({
 					values: {
 						total: control.values.total,
 						income: control.values.income,
-						expense: control.values.expense
+						expense: control.values.expense,
 					},
-					transactions: control.transactions
-				}
-			]
+					transactions: control.transactions,
+				},
+			],
 		}))
 	},
 	selectedControl: {
@@ -49,9 +49,9 @@ export const useControl = create<ControlsProps>((set) => ({
 		values: {
 			total: '',
 			income: '',
-			expense: ''
+			expense: '',
 		},
-		transactions: []
+		transactions: [],
 	},
-	setSelectedControl: (selectedControl: Control) => set({ selectedControl })
+	setSelectedControl: (selectedControl: Control) => set({ selectedControl }),
 }))

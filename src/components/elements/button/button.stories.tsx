@@ -6,8 +6,8 @@ const meta: Meta<typeof Button> = {
 	title: 'Button',
 	component: Button,
 	args: {
-		children: 'Novo controle'
-	}
+		children: 'Novo controle',
+	},
 }
 
 export default meta
