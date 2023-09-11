@@ -16,8 +16,8 @@ const ControlContainer = () => {
 				income={values.income}
 				expense={values.expense}
 			/>
-			{transactions?.map(({ id, name, value }) => (
-				<CardTransaction key={id} name={name} value={value} />
+			{transactions?.map(({ id, name, value, type }) => (
+				<CardTransaction key={id} name={name} value={value} type={type} />
 			))}
 
 			<FormNewTransaction />

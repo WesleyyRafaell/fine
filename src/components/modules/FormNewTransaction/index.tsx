@@ -1,10 +1,14 @@
+import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { v4 as uuidv4 } from 'uuid'
 
 import Input from '@/components/elements/Input'
 import SmallButton from '@/components/elements/SmallButton'
 import { formatCurrency } from '@/utils/formatCurrency'
+import { useControl } from '@/hooks/useControl'
+import { TypeCardProps } from '../CardTransaction'
 
 import * as S from './style'
 
@@ -16,6 +20,11 @@ const formNewTransactionSchema = z.object({
 type FormNewTransactionData = z.infer<typeof formNewTransactionSchema>
 
 const FormNewTransaction = () => {
+	const { selectedControl, setSelectedControl } = useControl()
+
+	const form = useRef<HTMLFormElement>(null)
+	const inputType = useRef<HTMLInputElement>(null)
+
 	const methods = useForm<FormNewTransactionData>({
 		defaultValues: {
 			name: '',
@@ -32,11 +41,34 @@ const FormNewTransaction = () => {
 	} = methods
 
 	const handleFormSubmit = (data: FormNewTransactionData) => {
-		console.log(`data`, data)
+		//find a better way
+		if (
+			inputType.current!.value !== 'green' &&
+			inputType.current!.value !== 'red'
+		)
+			return
+		const type: TypeCardProps = inputType.current!.value
+		const newItem = {
+			id: uuidv4(),
+			type,
+			...data,
+		}
+
+		const newSelectedControl = {
+			...selectedControl,
+			transactions: [...selectedControl.transactions, newItem],
+		}
+
+		setSelectedControl(newSelectedControl)
+	}
+
+	const handleSubmitFormAction = (type: TypeCardProps) => {
+		inputType.current!.value = type
+		form.current!.requestSubmit()
 	}
 
 	return (
-		<S.Container onSubmit={handleSubmit(handleFormSubmit)}>
+		<S.Container ref={form} onSubmit={handleSubmit(handleFormSubmit)}>
 			<S.Box>
 				<Input
 					name="name"
@@ -47,7 +79,12 @@ const FormNewTransaction = () => {
 					inputSize="small"
 					error={errors?.name?.message}
 				/>
-				<SmallButton type="submit">Receita</SmallButton>
+				<SmallButton
+					type="button"
+					onClick={() => handleSubmitFormAction('green')}
+				>
+					Receita
+				</SmallButton>
 			</S.Box>
 			<S.Box>
 				<Input
@@ -60,10 +97,15 @@ const FormNewTransaction = () => {
 					error={errors?.value?.message}
 					money
 				/>
-				<SmallButton type="submit" color="red">
+				<SmallButton
+					type="button"
+					color="red"
+					onClick={() => handleSubmitFormAction('red')}
+				>
 					Despesa
 				</SmallButton>
 			</S.Box>
+			<input type="hidden" name="type" ref={inputType} />
 		</S.Container>
 	)
 }

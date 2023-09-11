@@ -8,9 +8,9 @@ export type ButtonProps = {
 	color?: 'green' | 'red'
 } & ButtonTypes
 
-const SmallButton = ({ children, color = 'green' }: ButtonProps) => {
+const SmallButton = ({ children, color = 'green', ...rest }: ButtonProps) => {
 	return (
-		<S.Button color={color}>
+		<S.Button color={color} {...rest}>
 			<p>{children}</p>
 		</S.Button>
 	)

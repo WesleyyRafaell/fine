@@ -3,26 +3,27 @@ import * as S from './style'
 import Image from 'next/image'
 import Input from '../../elements/Input'
 
+export type TypeCardProps = 'red' | 'green'
+
 export type CardTransactionProps = {
 	name: string
 	value: string
+	type: TypeCardProps
 }
-
-export type TypeCardProps = 'red' | 'green'
 
 const containerMotion = {
 	rest: {
 		height: '9.1rem',
 		transition: {
-			duration: 0.4
-		}
+			duration: 0.4,
+		},
 	},
 	hover: {
 		height: '15rem',
 		transition: {
-			duration: 0.4
-		}
-	}
+			duration: 0.4,
+		},
+	},
 }
 
 const opacityMotion = {
@@ -30,21 +31,16 @@ const opacityMotion = {
 	hover: {
 		opacity: 1,
 		transition: {
-			duration: 0.4
-		}
-	}
+			duration: 0.4,
+		},
+	},
 }
 
-const CardTransaction = ({ name, value }: CardTransactionProps) => {
+const CardTransaction = ({ name, value, type }: CardTransactionProps) => {
 	const [enableCard, setEnableCard] = useState(true)
-	const [typeCard, setTypeCard] = useState<TypeCardProps>('green')
 
 	const toogleCard = () => {
 		setEnableCard(!enableCard)
-	}
-
-	const handleChangeTypeCard = (type: TypeCardProps) => {
-		setTypeCard(type)
 	}
 
 	return (
@@ -58,27 +54,27 @@ const CardTransaction = ({ name, value }: CardTransactionProps) => {
 		>
 			<S.TypeTransaction
 				data-testid="cardType"
-				type={typeCard}
+				type={type}
 				enable={enableCard}
 			/>
 			<S.Content>
 				<S.HeaderContent variants={opacityMotion}>
 					<S.Wrapper>
 						<S.CircleButton
-							onClick={() => handleChangeTypeCard('red')}
+							onClick={() => console.log('red')}
 							color="red"
 							data-testid="buttonRed"
 						/>
 						<S.CircleButton
-							onClick={() => handleChangeTypeCard('green')}
+							onClick={() => console.log('green')}
 							color="green"
 							data-testid="buttonGreen"
 						/>
 					</S.Wrapper>
 				</S.HeaderContent>
 				<S.MainContent>
-					<Input initialValue={name} inputSize="small" />
-					<Input initialValue={value} inputSize="small" money />
+					<Input value={name} error={undefined} inputSize="small" />
+					<Input value={value} error={undefined} inputSize="small" money />
 				</S.MainContent>
 				<S.FooterContent variants={opacityMotion}>
 					<S.Wrapper>

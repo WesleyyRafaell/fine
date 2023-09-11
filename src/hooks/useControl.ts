@@ -4,6 +4,7 @@ type Transaction = {
 	id: string
 	name: string
 	value: string
+	type: 'red' | 'green'
 }
 
 type Control = {
