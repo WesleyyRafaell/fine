@@ -11,6 +11,7 @@ const Home = () => {
 		useControl()
 
 	const newControl = () => {
+		console.log(`controls`, controls)
 		const newIdControl = uuidv4()
 
 		const control = {

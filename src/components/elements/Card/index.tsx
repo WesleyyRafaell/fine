@@ -1,20 +1,21 @@
 import * as S from './style'
 
 import TrashBlueIcon from '../../icons/Trash/index'
+import { useControl } from '@/hooks/useControl'
 
 const cardMotion = {
 	rest: {
 		height: 81,
 		transition: {
-			duration: 0.3
-		}
+			duration: 0.3,
+		},
 	},
 	hover: {
 		height: 109,
 		transition: {
-			duration: 0.4
-		}
-	}
+			duration: 0.4,
+		},
+	},
 }
 
 const textMotion = {
@@ -22,9 +23,9 @@ const textMotion = {
 	hover: {
 		opacity: 1,
 		transition: {
-			duration: 0.4
-		}
-	}
+			duration: 0.4,
+		},
+	},
 }
 
 export type CardProps = {
@@ -33,8 +34,11 @@ export type CardProps = {
 }
 
 const Card = ({ id, name = 'Novo controle' }: CardProps) => {
+	const { controls, setSelectedControl } = useControl()
+
 	const handleClickSelectCard = () => {
-		console.log(`iddd`, id)
+		const selectedControl = controls.filter((item) => item.id === id)
+		setSelectedControl(selectedControl[0])
 	}
 
 	return (

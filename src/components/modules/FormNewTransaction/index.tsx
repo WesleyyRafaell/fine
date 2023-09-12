@@ -20,7 +20,7 @@ const formNewTransactionSchema = z.object({
 type FormNewTransactionData = z.infer<typeof formNewTransactionSchema>
 
 const FormNewTransaction = () => {
-	const { selectedControl, setSelectedControl } = useControl()
+	const { selectedControl, setSelectedControl, updateControl } = useControl()
 
 	const form = useRef<HTMLFormElement>(null)
 	const inputType = useRef<HTMLInputElement>(null)
@@ -37,11 +37,12 @@ const FormNewTransaction = () => {
 		handleSubmit,
 		setValue,
 		watch,
+		reset,
 		formState: { errors },
 	} = methods
 
 	const handleFormSubmit = (data: FormNewTransactionData) => {
-		//find a better way
+		//find a better way - typescript
 		if (
 			inputType.current!.value !== 'green' &&
 			inputType.current!.value !== 'red'
@@ -59,7 +60,13 @@ const FormNewTransaction = () => {
 			transactions: [...selectedControl.transactions, newItem],
 		}
 
+		updateControl(newSelectedControl)
 		setSelectedControl(newSelectedControl)
+
+		reset({
+			name: '',
+			value: '',
+		})
 	}
 
 	const handleSubmitFormAction = (type: TypeCardProps) => {
