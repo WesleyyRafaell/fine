@@ -6,7 +6,7 @@ import * as S from './style'
 
 const ControlContainer = () => {
 	const {
-		selectedControl: { values, transactions },
+		selectedControl: { values, transactions, name },
 	} = useControl()
 
 	return (
@@ -15,6 +15,7 @@ const ControlContainer = () => {
 				total={values.total}
 				income={values.income}
 				expense={values.expense}
+				initialValue={name}
 			/>
 			{transactions?.map(({ id, name, value, type }) => (
 				<CardTransaction key={id} name={name} value={value} type={type} />

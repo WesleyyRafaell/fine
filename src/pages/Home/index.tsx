@@ -11,7 +11,6 @@ const Home = () => {
 		useControl()
 
 	const newControl = () => {
-		console.log(`controls`, controls)
 		const newIdControl = uuidv4()
 
 		const control = {
@@ -25,7 +24,6 @@ const Home = () => {
 			transactions: [],
 		}
 
-		// console.log(`control`, control)
 		addControl(control)
 		setSelectedControl(control)
 	}

@@ -21,7 +21,7 @@ type Control = {
 type ControlsProps = {
 	controls: Control[]
 	addControl: (control: Control) => void
-	updateControl: (control: Control) => void
+	updateControl: (controls: Control[]) => void
 	selectedControl: Control
 	setSelectedControl: (control: Control) => void
 }
@@ -45,14 +45,7 @@ export const useControl = create<ControlsProps>((set) => ({
 			],
 		}))
 	},
-	updateControl: (control: Control) => {
-		set((state) => ({
-			controls: [
-				...state.controls.filter((item) => item.id !== control.id),
-				control,
-			],
-		}))
-	},
+	updateControl: (controls) => set({ controls }),
 	selectedControl: {
 		id: '',
 		name: '',

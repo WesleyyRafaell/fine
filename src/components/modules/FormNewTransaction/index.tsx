@@ -20,7 +20,8 @@ const formNewTransactionSchema = z.object({
 type FormNewTransactionData = z.infer<typeof formNewTransactionSchema>
 
 const FormNewTransaction = () => {
-	const { selectedControl, setSelectedControl, updateControl } = useControl()
+	const { selectedControl, setSelectedControl, updateControl, controls } =
+		useControl()
 
 	const form = useRef<HTMLFormElement>(null)
 	const inputType = useRef<HTMLInputElement>(null)
@@ -60,7 +61,10 @@ const FormNewTransaction = () => {
 			transactions: [...selectedControl.transactions, newItem],
 		}
 
-		updateControl(newSelectedControl)
+		const index = controls.findIndex((item) => item.id === selectedControl.id)
+		controls[index].transactions.push(newItem)
+
+		updateControl(controls)
 		setSelectedControl(newSelectedControl)
 
 		reset({
