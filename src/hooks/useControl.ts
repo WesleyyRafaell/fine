@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type Transaction = {
+export type Transaction = {
 	id: string
 	name: string
 	value: string
@@ -22,8 +22,10 @@ type ControlsProps = {
 	controls: Control[]
 	addControl: (control: Control) => void
 	updateControl: (controls: Control[]) => void
+	updateNameControl: (id: string, name: string) => void
+	updateTransaction: (id: string, transaction: Transaction) => void
 	selectedControl: Control
-	setSelectedControl: (control: Control) => void
+	setSelectedControl: (id: string) => void
 }
 
 export const useControl = create<ControlsProps>((set) => ({
@@ -45,6 +47,35 @@ export const useControl = create<ControlsProps>((set) => ({
 			],
 		}))
 	},
+	updateNameControl: (id, name) => {
+		set((state) => ({
+			controls: [
+				...state.controls.map((item) => {
+					if (item.id === id) {
+						item.name = name
+						set({ selectedControl: item })
+						return item
+					}
+
+					return item
+				}),
+			],
+		}))
+	},
+	updateTransaction: (id, transaction) => {
+		set((state) => ({
+			controls: [
+				...state.controls.map((item) => {
+					if (item.id === id) {
+						item.transactions.push(transaction)
+						set({ selectedControl: item })
+						return item
+					}
+					return item
+				}),
+			],
+		}))
+	},
 	updateControl: (controls) => set({ controls }),
 	selectedControl: {
 		id: '',
@@ -56,5 +87,9 @@ export const useControl = create<ControlsProps>((set) => ({
 		},
 		transactions: [],
 	},
-	setSelectedControl: (selectedControl: Control) => set({ selectedControl }),
+	setSelectedControl: (id) => {
+		set((state) => ({
+			selectedControl: state.controls.filter((item) => item.id === id)[0],
+		}))
+	},
 }))

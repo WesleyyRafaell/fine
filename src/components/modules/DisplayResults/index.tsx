@@ -1,9 +1,9 @@
-import ResultIndicator from '@/components/elements/ResultIndicator'
-import * as S from './style'
-import Input from '@/components/elements/Input'
-import { useControl } from '@/hooks/useControl'
-import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
+
+import ResultIndicator from '@/components/elements/ResultIndicator'
+import { useControl } from '@/hooks/useControl'
+
+import * as S from './style'
 
 type DisplayResultsProps = {
 	total: string
@@ -18,21 +18,12 @@ const DisplayResults = ({
 	income,
 	initialValue,
 }: DisplayResultsProps) => {
-	const { controls, selectedControl, updateControl, setSelectedControl } =
-		useControl()
+	const { selectedControl, updateNameControl } = useControl()
 	const [selectedNameInput, setSelectedNameInput] = useState(initialValue)
 
 	useEffect(() => {
-		const newSelectedControl = {
-			...selectedControl,
-			name: selectedNameInput,
-		}
-
-		const index = controls.findIndex((item) => item.id === selectedControl.id)
-		controls[index].name = selectedNameInput
-
-		updateControl(controls)
-		setSelectedControl(newSelectedControl)
+		updateNameControl(selectedControl.id, selectedNameInput)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedNameInput])
 
 	useEffect(() => {
@@ -42,14 +33,6 @@ const DisplayResults = ({
 	return (
 		<S.Container>
 			<S.ContainerForm>
-				{/* <Input
-					name="name"
-					value={nameInput}
-					onChange={(e) => setValue('name', e.target.value)}
-					labelName="Nome do controle:"
-					placeholder="Ex: controle fevereiro"
-					error={undefined}
-				/> */}
 				<input
 					type="text"
 					name="name"
@@ -57,8 +40,6 @@ const DisplayResults = ({
 					value={selectedNameInput}
 					onChange={(e) => setSelectedNameInput(e.target.value)}
 				/>
-				<p>{selectedNameInput}</p>
-				<p>{initialValue}</p>
 			</S.ContainerForm>
 			<ResultIndicator moneySignColor="orange" total={total} text="Total" />
 			<S.Box>

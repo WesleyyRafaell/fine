@@ -20,8 +20,7 @@ const formNewTransactionSchema = z.object({
 type FormNewTransactionData = z.infer<typeof formNewTransactionSchema>
 
 const FormNewTransaction = () => {
-	const { selectedControl, setSelectedControl, updateControl, controls } =
-		useControl()
+	const { updateTransaction, selectedControl } = useControl()
 
 	const form = useRef<HTMLFormElement>(null)
 	const inputType = useRef<HTMLInputElement>(null)
@@ -49,6 +48,7 @@ const FormNewTransaction = () => {
 			inputType.current!.value !== 'red'
 		)
 			return
+
 		const type: TypeCardProps = inputType.current!.value
 		const newItem = {
 			id: uuidv4(),
@@ -56,16 +56,7 @@ const FormNewTransaction = () => {
 			...data,
 		}
 
-		const newSelectedControl = {
-			...selectedControl,
-			transactions: [...selectedControl.transactions, newItem],
-		}
-
-		const index = controls.findIndex((item) => item.id === selectedControl.id)
-		controls[index].transactions.push(newItem)
-
-		updateControl(controls)
-		setSelectedControl(newSelectedControl)
+		updateTransaction(selectedControl.id, newItem)
 
 		reset({
 			name: '',

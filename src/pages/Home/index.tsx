@@ -1,14 +1,15 @@
-import ControlContainer from '@/components/modules/ControlContainer'
-import * as S from './style'
-import Button from '@/components/elements/button'
-import Card from '@/components/elements/Card'
-import { useControl } from '@/hooks/useControl'
-import { RenderCondition } from '@/utils/renderCondition'
 import { v4 as uuidv4 } from 'uuid'
 
+import Button from '@/components/elements/button'
+import Card from '@/components/elements/Card'
+import ControlContainer from '@/components/modules/ControlContainer'
+import { useControl } from '@/hooks/useControl'
+import { RenderCondition } from '@/utils/renderCondition'
+
+import * as S from './style'
+
 const Home = () => {
-	const { controls, selectedControl, addControl, setSelectedControl } =
-		useControl()
+	const { controls, addControl, setSelectedControl } = useControl()
 
 	const newControl = () => {
 		const newIdControl = uuidv4()
@@ -25,7 +26,7 @@ const Home = () => {
 		}
 
 		addControl(control)
-		setSelectedControl(control)
+		setSelectedControl(control.id)
 	}
 
 	return (
@@ -40,11 +41,8 @@ const Home = () => {
 					</S.CardsContainer>
 				</S.Box>
 				<S.Box>
-					<RenderCondition condition={!!selectedControl.name.length}>
+					<RenderCondition condition={controls.length > 0}>
 						<ControlContainer />
-					</RenderCondition>
-					<RenderCondition condition={!selectedControl.name.length}>
-						<p>Nenhum card selecionado</p>
 					</RenderCondition>
 				</S.Box>
 			</S.Wrapper>

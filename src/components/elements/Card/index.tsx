@@ -34,12 +34,10 @@ export type CardProps = {
 }
 
 const Card = ({ id, name = 'Novo controle' }: CardProps) => {
-	const { controls, setSelectedControl } = useControl()
+	const { setSelectedControl } = useControl()
 
 	const handleClickSelectCard = () => {
-		const selectedControl = controls.filter((item) => item.id === id)
-		console.log(`selectedControl`, selectedControl[0])
-		setSelectedControl(selectedControl[0])
+		setSelectedControl(id)
 	}
 
 	return (
