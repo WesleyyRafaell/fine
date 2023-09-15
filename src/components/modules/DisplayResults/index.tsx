@@ -30,16 +30,27 @@ const DisplayResults = ({
 		setSelectedNameInput(initialValue)
 	}, [initialValue])
 
+	const cleanNameInput = () => {
+		updateNameControl(selectedControl.id, '')
+	}
+
 	return (
 		<S.Container>
 			<S.ContainerForm>
-				<input
-					type="text"
-					name="name"
-					id="name"
-					value={selectedNameInput}
-					onChange={(e) => setSelectedNameInput(e.target.value)}
-				/>
+				<S.ContainerInput>
+					<S.Label htmlFor="input">Nome do controle</S.Label>
+					<S.WrapperInput>
+						<S.TextInput
+							inputSize="regular"
+							type="text"
+							name="name"
+							id="name"
+							value={selectedNameInput}
+							onChange={(e) => setSelectedNameInput(e.target.value)}
+						/>
+						<S.Icon onClick={cleanNameInput} />
+					</S.WrapperInput>
+				</S.ContainerInput>
 			</S.ContainerForm>
 			<ResultIndicator moneySignColor="orange" total={total} text="Total" />
 			<S.Box>
