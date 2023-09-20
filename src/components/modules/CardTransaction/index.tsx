@@ -1,11 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from './style'
 import Image from 'next/image'
 import Input from '../../elements/Input'
+import { useForm } from 'react-hook-form'
+import { useControl } from '@/hooks/useControl'
+import { formatCurrency } from '@/utils/formatCurrency'
 
 export type TypeCardProps = 'red' | 'green'
 
 export type CardTransactionProps = {
+	idControl: string
+	idTransaction: string
 	name: string
 	value: string
 	type: TypeCardProps
@@ -36,12 +41,39 @@ const opacityMotion = {
 	},
 }
 
-const CardTransaction = ({ name, value, type }: CardTransactionProps) => {
+const CardTransaction = ({
+	idControl,
+	idTransaction,
+	name,
+	value,
+	type,
+}: CardTransactionProps) => {
 	const [enableCard, setEnableCard] = useState(true)
+	const { updateTransaction } = useControl()
+
+	const methods = useForm({
+		defaultValues: {
+			nameEdit: name,
+			valueEdit: value,
+		},
+	})
+
+	const { setValue, watch } = methods
+
+	const nameInput = watch('nameEdit')
+	const valueInput = watch('valueEdit')
 
 	const toogleCard = () => {
 		setEnableCard(!enableCard)
 	}
+
+	useEffect(() => {
+		updateTransaction(idControl, idTransaction, 'name', nameInput)
+	}, [nameInput])
+
+	useEffect(() => {
+		updateTransaction(idControl, idTransaction, 'value', valueInput)
+	}, [valueInput])
 
 	return (
 		<S.Container
@@ -73,8 +105,23 @@ const CardTransaction = ({ name, value, type }: CardTransactionProps) => {
 					</S.Wrapper>
 				</S.HeaderContent>
 				<S.MainContent>
-					<Input value={name} error={undefined} inputSize="small" />
-					<Input value={value} error={undefined} inputSize="small" money />
+					<Input
+						name="nameEdit"
+						value={nameInput}
+						onChange={(e) => setValue('nameEdit', e.target.value)}
+						error={undefined}
+						inputSize="small"
+					/>
+					<Input
+						name="valueEdit"
+						value={valueInput}
+						onChange={(e) =>
+							setValue('valueEdit', formatCurrency(e.target.value))
+						}
+						error={undefined}
+						inputSize="small"
+						money
+					/>
 				</S.MainContent>
 				<S.FooterContent variants={opacityMotion}>
 					<S.Wrapper>

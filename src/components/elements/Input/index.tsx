@@ -27,7 +27,6 @@ const Input = ({
 		...(name && { ...register(name) }),
 		...rest,
 		id: inputId,
-		value: rest?.value,
 	}
 
 	return (

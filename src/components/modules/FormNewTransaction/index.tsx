@@ -20,7 +20,7 @@ const formNewTransactionSchema = z.object({
 type FormNewTransactionData = z.infer<typeof formNewTransactionSchema>
 
 const FormNewTransaction = () => {
-	const { updateTransaction, selectedControl } = useControl()
+	const { addNewTransaction, selectedControl } = useControl()
 
 	const form = useRef<HTMLFormElement>(null)
 	const inputType = useRef<HTMLInputElement>(null)
@@ -56,7 +56,7 @@ const FormNewTransaction = () => {
 			...data,
 		}
 
-		updateTransaction(selectedControl.id, newItem)
+		addNewTransaction(selectedControl.id, newItem)
 
 		reset({
 			name: '',

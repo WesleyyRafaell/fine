@@ -23,7 +23,14 @@ type ControlsProps = {
 	addControl: (control: Control) => void
 	updateControl: (controls: Control[]) => void
 	updateNameControl: (id: string, name: string) => void
-	updateTransaction: (id: string, transaction: Transaction) => void
+	addNewTransaction: (id: string, transaction: Transaction) => void
+	updateTransaction: (
+		idControl: string,
+		idTransaction: string,
+		type: 'name' | 'value',
+		value: string,
+	) => void
+
 	selectedControl: Control
 	setSelectedControl: (id: string) => void
 }
@@ -62,7 +69,7 @@ export const useControl = create<ControlsProps>((set) => ({
 			],
 		}))
 	},
-	updateTransaction: (id, transaction) => {
+	addNewTransaction: (id, transaction) => {
 		set((state) => ({
 			controls: [
 				...state.controls.map((item) => {
@@ -70,6 +77,24 @@ export const useControl = create<ControlsProps>((set) => ({
 						item.transactions.push(transaction)
 						set({ selectedControl: item })
 						return item
+					}
+					return item
+				}),
+			],
+		}))
+	},
+	updateTransaction: (idControl, idTransaction, type, value) => {
+		set((state) => ({
+			controls: [
+				...state.controls.map((item) => {
+					if (item.id === idControl) {
+						item.transactions.map((itemTransaction) => {
+							if (itemTransaction.id === idTransaction) {
+								itemTransaction[type] = value
+							}
+							set({ selectedControl: item })
+							return item
+						})
 					}
 					return item
 				}),
