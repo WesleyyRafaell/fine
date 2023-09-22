@@ -49,7 +49,7 @@ const CardTransaction = ({
 	type,
 }: CardTransactionProps) => {
 	const [enableCard, setEnableCard] = useState(true)
-	const { updateTransaction } = useControl()
+	const { updateTransaction, updateTypeTransaction } = useControl()
 
 	const methods = useForm({
 		defaultValues: {
@@ -75,6 +75,10 @@ const CardTransaction = ({
 		updateTransaction(idControl, idTransaction, 'value', valueInput)
 	}, [valueInput])
 
+	const handleChangeTypeCard = (type: 'red' | 'green') => {
+		updateTypeTransaction(idControl, idTransaction, type)
+	}
+
 	return (
 		<S.Container
 			variants={containerMotion}
@@ -93,12 +97,12 @@ const CardTransaction = ({
 				<S.HeaderContent variants={opacityMotion}>
 					<S.Wrapper>
 						<S.CircleButton
-							onClick={() => console.log('red')}
+							onClick={() => handleChangeTypeCard('red')}
 							color="red"
 							data-testid="buttonRed"
 						/>
 						<S.CircleButton
-							onClick={() => console.log('green')}
+							onClick={() => handleChangeTypeCard('green')}
 							color="green"
 							data-testid="buttonGreen"
 						/>

@@ -30,6 +30,11 @@ type ControlsProps = {
 		type: 'name' | 'value',
 		value: string,
 	) => void
+	updateTypeTransaction: (
+		idControl: string,
+		idTransaction: string,
+		type: 'red' | 'green',
+	) => void
 
 	selectedControl: Control
 	setSelectedControl: (id: string) => void
@@ -91,6 +96,24 @@ export const useControl = create<ControlsProps>((set) => ({
 						item.transactions.map((itemTransaction) => {
 							if (itemTransaction.id === idTransaction) {
 								itemTransaction[type] = value
+							}
+							set({ selectedControl: item })
+							return item
+						})
+					}
+					return item
+				}),
+			],
+		}))
+	},
+	updateTypeTransaction: (idControl, idTransaction, type) => {
+		set((state) => ({
+			controls: [
+				...state.controls.map((item) => {
+					if (item.id === idControl) {
+						item.transactions.map((itemTransaction) => {
+							if (itemTransaction.id === idTransaction) {
+								itemTransaction.type = type
 							}
 							set({ selectedControl: item })
 							return item
