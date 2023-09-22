@@ -4,6 +4,7 @@ export type Transaction = {
 	id: string
 	name: string
 	value: string
+	visible: boolean
 	type: 'red' | 'green'
 }
 
@@ -34,6 +35,11 @@ type ControlsProps = {
 		idControl: string,
 		idTransaction: string,
 		type: 'red' | 'green',
+	) => void
+	updateVisibilityTransaction: (
+		idControl: string,
+		idTransaction: string,
+		visible: boolean,
 	) => void
 
 	selectedControl: Control
@@ -114,6 +120,24 @@ export const useControl = create<ControlsProps>((set) => ({
 						item.transactions.map((itemTransaction) => {
 							if (itemTransaction.id === idTransaction) {
 								itemTransaction.type = type
+							}
+							set({ selectedControl: item })
+							return item
+						})
+					}
+					return item
+				}),
+			],
+		}))
+	},
+	updateVisibilityTransaction: (idControl, idTransaction, visible) => {
+		set((state) => ({
+			controls: [
+				...state.controls.map((item) => {
+					if (item.id === idControl) {
+						item.transactions.map((itemTransaction) => {
+							if (itemTransaction.id === idTransaction) {
+								itemTransaction.visible = visible
 							}
 							set({ selectedControl: item })
 							return item

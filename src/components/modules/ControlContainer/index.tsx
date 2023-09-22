@@ -25,6 +25,7 @@ const ControlContainer = () => {
 					name={item.name}
 					value={item.value}
 					type={item.type}
+					visible={item.visible}
 				/>
 			))}
 

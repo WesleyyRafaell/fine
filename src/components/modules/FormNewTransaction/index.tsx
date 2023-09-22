@@ -50,13 +50,14 @@ const FormNewTransaction = () => {
 			return
 
 		const type: TypeCardProps = inputType.current!.value
-		const newItem = {
+		const newTransaction = {
 			id: uuidv4(),
 			type,
+			visible: true,
 			...data,
 		}
 
-		addNewTransaction(selectedControl.id, newItem)
+		addNewTransaction(selectedControl.id, newTransaction)
 
 		reset({
 			name: '',

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import ResultIndicator from '@/components/elements/ResultIndicator'
 import { useControl } from '@/hooks/useControl'
@@ -20,6 +20,7 @@ const DisplayResults = ({
 }: DisplayResultsProps) => {
 	const { selectedControl, updateNameControl } = useControl()
 	const [selectedNameInput, setSelectedNameInput] = useState(initialValue)
+	const inputName = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
 		updateNameControl(selectedControl.id, selectedNameInput)
@@ -32,6 +33,7 @@ const DisplayResults = ({
 
 	const cleanNameInput = () => {
 		updateNameControl(selectedControl.id, '')
+		inputName?.current?.focus()
 	}
 
 	return (
@@ -47,6 +49,7 @@ const DisplayResults = ({
 							id="name"
 							value={selectedNameInput}
 							onChange={(e) => setSelectedNameInput(e.target.value)}
+							ref={inputName}
 						/>
 						<S.Icon onClick={cleanNameInput} />
 					</S.WrapperInput>

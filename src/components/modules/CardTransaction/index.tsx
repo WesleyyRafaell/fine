@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import * as S from './style'
 import Image from 'next/image'
 import Input from '../../elements/Input'
@@ -14,6 +14,7 @@ export type CardTransactionProps = {
 	name: string
 	value: string
 	type: TypeCardProps
+	visible: boolean
 }
 
 const containerMotion = {
@@ -47,9 +48,13 @@ const CardTransaction = ({
 	name,
 	value,
 	type,
+	visible,
 }: CardTransactionProps) => {
-	const [enableCard, setEnableCard] = useState(true)
-	const { updateTransaction, updateTypeTransaction } = useControl()
+	const {
+		updateTransaction,
+		updateTypeTransaction,
+		updateVisibilityTransaction,
+	} = useControl()
 
 	const methods = useForm({
 		defaultValues: {
@@ -64,15 +69,17 @@ const CardTransaction = ({
 	const valueInput = watch('valueEdit')
 
 	const toogleCard = () => {
-		setEnableCard(!enableCard)
+		updateVisibilityTransaction(idControl, idTransaction, !visible)
 	}
 
 	useEffect(() => {
 		updateTransaction(idControl, idTransaction, 'name', nameInput)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [nameInput])
 
 	useEffect(() => {
 		updateTransaction(idControl, idTransaction, 'value', valueInput)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [valueInput])
 
 	const handleChangeTypeCard = (type: 'red' | 'green') => {
@@ -85,14 +92,10 @@ const CardTransaction = ({
 			initial="rest"
 			whileHover="hover"
 			animate="rest"
-			enablecardcontainer={+enableCard}
+			enablecardcontainer={+visible}
 			data-testid="card"
 		>
-			<S.TypeTransaction
-				data-testid="cardType"
-				type={type}
-				enable={enableCard}
-			/>
+			<S.TypeTransaction data-testid="cardType" type={type} enable={visible} />
 			<S.Content>
 				<S.HeaderContent variants={opacityMotion}>
 					<S.Wrapper>
@@ -130,7 +133,7 @@ const CardTransaction = ({
 				<S.FooterContent variants={opacityMotion}>
 					<S.Wrapper>
 						<S.ImageButton>
-							{enableCard ? (
+							{visible ? (
 								<Image
 									src="/icons/trashIcon.png"
 									width={24}
@@ -147,7 +150,7 @@ const CardTransaction = ({
 							)}
 						</S.ImageButton>
 						<S.ImageButton data-testid="buttonDisableCard" onClick={toogleCard}>
-							{enableCard ? (
+							{visible ? (
 								<Image
 									src="/icons/disableIcon.png"
 									width={22}
