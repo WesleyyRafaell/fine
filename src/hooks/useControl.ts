@@ -44,6 +44,8 @@ type ControlsProps = {
 
 	selectedControl: Control
 	setSelectedControl: (id: string) => void
+	setDeleteControl: (idControl: string) => void
+	setDeleteTransaction: (idControl: string, idTransaction: string) => void
 }
 
 export const useControl = create<ControlsProps>((set) => ({
@@ -142,6 +144,27 @@ export const useControl = create<ControlsProps>((set) => ({
 							set({ selectedControl: item })
 							return item
 						})
+					}
+					return item
+				}),
+			],
+		}))
+	},
+	setDeleteControl: (idControl) => {
+		set((state) => ({
+			selectedControl: state.controls[0],
+			controls: [...state.controls.filter((item) => item.id !== idControl)],
+		}))
+	},
+	setDeleteTransaction: (idControl, idTransaction) => {
+		set((state) => ({
+			controls: [
+				...state.controls.filter((item) => {
+					if (item.id === idControl) {
+						item.transactions = item.transactions.filter(
+							(itemTransaction) => itemTransaction.id !== idTransaction,
+						)
+						return item
 					}
 					return item
 				}),

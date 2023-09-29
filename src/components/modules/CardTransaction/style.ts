@@ -112,3 +112,35 @@ export const Text = styled.p`
 		font-weight: ${theme.font.bold};
 	`}
 `
+export const WrapperModal = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`
+
+export const Modal = styled.div`
+	${({ theme }) => css`
+		width: 45rem;
+		padding: 2rem 2rem 2.5rem 2rem;
+		background: ${theme.colors.white};
+		border-radius: 0.625rem;
+		transform: rotate(-1deg);
+	`}
+`
+export const TitleModal = styled.h3`
+	${({ theme }) => css`
+		color: ${theme.colors.darkGray};
+		font-size: 1.7rem;
+	`}
+`
+export const ContainerButtonsModal = styled.div`
+	padding-top: 5rem;
+	display: flex;
+	justify-content: space-between;
+`

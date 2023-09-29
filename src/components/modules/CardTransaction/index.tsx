@@ -1,10 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from './style'
 import Image from 'next/image'
 import Input from '../../elements/Input'
 import { useForm } from 'react-hook-form'
 import { useControl } from '@/hooks/useControl'
 import { formatCurrency } from '@/utils/formatCurrency'
+import { RenderCondition } from '@/utils/renderCondition'
+import SmallButton from '@/components/elements/SmallButton'
 
 export type TypeCardProps = 'red' | 'green'
 
@@ -50,10 +52,12 @@ const CardTransaction = ({
 	type,
 	visible,
 }: CardTransactionProps) => {
+	const [openModal, setOpenModal] = useState(false)
 	const {
 		updateTransaction,
 		updateTypeTransaction,
 		updateVisibilityTransaction,
+		setDeleteTransaction,
 	} = useControl()
 
 	const methods = useForm({
@@ -84,6 +88,11 @@ const CardTransaction = ({
 
 	const handleChangeTypeCard = (type: 'red' | 'green') => {
 		updateTypeTransaction(idControl, idTransaction, type)
+	}
+
+	const handleDelete = () => {
+		console.log(`t avindo`)
+		setDeleteTransaction(idControl, idTransaction)
 	}
 
 	return (
@@ -132,7 +141,7 @@ const CardTransaction = ({
 				</S.MainContent>
 				<S.FooterContent variants={opacityMotion}>
 					<S.Wrapper>
-						<S.ImageButton>
+						<S.ImageButton onClick={() => setOpenModal(true)}>
 							{visible ? (
 								<Image
 									src="/icons/trashIcon.png"
@@ -169,6 +178,23 @@ const CardTransaction = ({
 					</S.Wrapper>
 				</S.FooterContent>
 			</S.Content>
+			<RenderCondition condition={openModal}>
+				<S.WrapperModal>
+					<S.Modal>
+						<S.TitleModal>
+							Tem certeza que deseja apagar esta transação?
+						</S.TitleModal>
+						<S.ContainerButtonsModal>
+							<SmallButton color="red" onClick={handleDelete}>
+								Apagar
+							</SmallButton>
+							<SmallButton onClick={() => setOpenModal(false)}>
+								Cancelar
+							</SmallButton>
+						</S.ContainerButtonsModal>
+					</S.Modal>
+				</S.WrapperModal>
+			</RenderCondition>
 		</S.Container>
 	)
 }

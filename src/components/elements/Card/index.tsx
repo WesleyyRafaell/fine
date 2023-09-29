@@ -2,6 +2,9 @@ import * as S from './style'
 
 import TrashBlueIcon from '../../icons/Trash/index'
 import { useControl } from '@/hooks/useControl'
+import { useState } from 'react'
+import { RenderCondition } from '@/utils/renderCondition'
+import SmallButton from '../SmallButton'
 
 const cardMotion = {
 	rest: {
@@ -34,28 +37,51 @@ export type CardProps = {
 }
 
 const Card = ({ id, name = 'Novo controle' }: CardProps) => {
-	const { setSelectedControl } = useControl()
+	const [openModal, setOpenModal] = useState(false)
+	const { setSelectedControl, setDeleteControl } = useControl()
 
 	const handleClickSelectCard = () => {
 		setSelectedControl(id)
 	}
 
+	const handleDelete = () => {
+		setDeleteControl(id)
+	}
+
 	return (
-		<S.Container onClick={handleClickSelectCard}>
+		<S.Container>
 			<S.Card
 				variants={cardMotion}
 				initial="rest"
 				whileHover="hover"
 				animate="rest"
 				data-testid="Card"
+				onClick={handleClickSelectCard}
 			>
 				<S.Text>{name}</S.Text>
 				<S.ContainerIcon variants={textMotion} data-testid="ContainerIcon">
-					<S.BoxIcon>
+					<S.BoxIcon onClick={() => setOpenModal(true)}>
 						<TrashBlueIcon />
 					</S.BoxIcon>
 				</S.ContainerIcon>
 			</S.Card>
+			<RenderCondition condition={openModal}>
+				<S.WrapperModal>
+					<S.Modal>
+						<S.TitleModal>
+							Tem certeza que deseja apagar este controle?
+						</S.TitleModal>
+						<S.ContainerButtonsModal>
+							<SmallButton color="red" onClick={handleDelete}>
+								Apagar
+							</SmallButton>
+							<SmallButton onClick={() => setOpenModal(false)}>
+								Cancelar
+							</SmallButton>
+						</S.ContainerButtonsModal>
+					</S.Modal>
+				</S.WrapperModal>
+			</RenderCondition>
 		</S.Container>
 	)
 }
