@@ -6,20 +6,19 @@ import { useControl } from '@/hooks/useControl'
 import * as S from './style'
 
 type DisplayResultsProps = {
-	total: string
-	income: string
-	expense: string
 	initialValue: string
 }
 
-const DisplayResults = ({
-	total,
-	expense,
-	income,
-	initialValue,
-}: DisplayResultsProps) => {
+type Values = {
+	total: number
+	income: number
+	expense: number
+}
+
+const DisplayResults = ({ initialValue }: DisplayResultsProps) => {
 	const { selectedControl, updateNameControl } = useControl()
 	const [selectedNameInput, setSelectedNameInput] = useState(initialValue)
+	const [values, setValues] = useState<Values>()
 	const inputName = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
@@ -35,6 +34,10 @@ const DisplayResults = ({
 		updateNameControl(selectedControl.id, '')
 		inputName?.current?.focus()
 	}
+
+	useEffect(() => {
+		setValues(selectedControl.values)
+	}, [selectedControl])
 
 	return (
 		<S.Container>
@@ -55,14 +58,22 @@ const DisplayResults = ({
 					</S.WrapperInput>
 				</S.ContainerInput>
 			</S.ContainerForm>
-			<ResultIndicator moneySignColor="orange" total={total} text="Total" />
+			<ResultIndicator
+				moneySignColor="orange"
+				total={values?.total}
+				text="Total"
+			/>
 			<S.Box>
 				<ResultIndicator
 					moneySignColor="green"
-					total={income}
+					total={values?.income}
 					text="Receitas"
 				/>
-				<ResultIndicator moneySignColor="red" total={expense} text="Despesas" />
+				<ResultIndicator
+					moneySignColor="red"
+					total={values?.expense}
+					text="Despesas"
+				/>
 			</S.Box>
 		</S.Container>
 	)

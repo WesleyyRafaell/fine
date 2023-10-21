@@ -78,20 +78,17 @@ const CardTransaction = ({
 
 	useEffect(() => {
 		updateTransaction(idControl, idTransaction, 'name', nameInput)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [nameInput])
+	}, [idControl, idTransaction, nameInput, updateTransaction])
 
 	useEffect(() => {
 		updateTransaction(idControl, idTransaction, 'value', valueInput)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [valueInput])
+	}, [idControl, idTransaction, updateTransaction, valueInput])
 
 	const handleChangeTypeCard = (type: 'red' | 'green') => {
 		updateTypeTransaction(idControl, idTransaction, type)
 	}
 
 	const handleDelete = () => {
-		console.log(`t avindo`)
 		setDeleteTransaction(idControl, idTransaction)
 	}
 

@@ -12,9 +12,9 @@ type Control = {
 	id: string
 	name: string
 	values: {
-		total: string
-		income: string
-		expense: string
+		total: number
+		income: number
+		expense: number
 	}
 	transactions: Transaction[]
 }
@@ -46,6 +46,7 @@ type ControlsProps = {
 	setSelectedControl: (id: string) => void
 	setDeleteControl: (idControl: string) => void
 	setDeleteTransaction: (idControl: string, idTransaction: string) => void
+	updateResults: (item: Control) => void
 }
 
 export const useControl = create<ControlsProps>((set) => ({
@@ -89,6 +90,7 @@ export const useControl = create<ControlsProps>((set) => ({
 					if (item.id === id) {
 						item.transactions.push(transaction)
 						set({ selectedControl: item })
+						state.updateResults(item)
 						return item
 					}
 					return item
@@ -105,7 +107,7 @@ export const useControl = create<ControlsProps>((set) => ({
 							if (itemTransaction.id === idTransaction) {
 								itemTransaction[type] = value
 							}
-							set({ selectedControl: item })
+							state.updateResults(item)
 							return item
 						})
 					}
@@ -150,6 +152,33 @@ export const useControl = create<ControlsProps>((set) => ({
 			],
 		}))
 	},
+	updateResults: (item) => {
+		const incomes = item.transactions.filter((item) => item.type === 'green')
+		const totalIncome = incomes
+			.map((item) => parseFloat(item.value.replace('.', '')))
+			.reduce((previousValue, currentValue) => previousValue + currentValue, 0)
+
+		const expenses = item.transactions.filter((item) => item.type === 'red')
+		const totalExpense = expenses
+			.map((item) => parseFloat(item.value.replace('.', '')))
+			.reduce((previousValue, currentValue) => previousValue + currentValue, 0)
+
+		console.log(`incomes`, incomes)
+		console.log(`expenses`, expenses)
+
+		const newValues = {
+			expense: totalExpense,
+			income: totalIncome,
+			total: totalIncome - totalExpense,
+		}
+
+		const newSelectedControl = {
+			...item,
+			values: newValues,
+		}
+
+		set({ selectedControl: newSelectedControl })
+	},
 	setDeleteControl: (idControl) => {
 		set((state) => ({
 			selectedControl: state.controls[0],
@@ -176,9 +205,9 @@ export const useControl = create<ControlsProps>((set) => ({
 		id: '',
 		name: '',
 		values: {
-			total: '',
-			income: '',
-			expense: '',
+			total: 0,
+			income: 0,
+			expense: 0,
 		},
 		transactions: [],
 	},
