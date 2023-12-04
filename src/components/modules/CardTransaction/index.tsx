@@ -90,6 +90,7 @@ const CardTransaction = ({
 
 	const handleDelete = () => {
 		setDeleteTransaction(idControl, idTransaction)
+		setOpenModal(false)
 	}
 
 	return (

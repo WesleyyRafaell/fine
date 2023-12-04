@@ -126,6 +126,7 @@ export const useControl = create<ControlsProps>((set) => ({
 								itemTransaction.type = type
 							}
 							set({ selectedControl: item })
+							state.updateResults(item)
 							return item
 						})
 					}
@@ -144,6 +145,7 @@ export const useControl = create<ControlsProps>((set) => ({
 								itemTransaction.visible = visible
 							}
 							set({ selectedControl: item })
+							state.updateResults(item)
 							return item
 						})
 					}
@@ -153,18 +155,21 @@ export const useControl = create<ControlsProps>((set) => ({
 		}))
 	},
 	updateResults: (item) => {
-		const incomes = item.transactions.filter((item) => item.type === 'green')
+		const incomes = item.transactions.filter(
+			(item) => item.type === 'green' && item.value && item.visible,
+		)
+
 		const totalIncome = incomes
 			.map((item) => parseFloat(item.value.replace('.', '')))
 			.reduce((previousValue, currentValue) => previousValue + currentValue, 0)
 
-		const expenses = item.transactions.filter((item) => item.type === 'red')
+		const expenses = item.transactions.filter(
+			(item) => item.type === 'red' && item.value && item.visible,
+		)
+
 		const totalExpense = expenses
 			.map((item) => parseFloat(item.value.replace('.', '')))
 			.reduce((previousValue, currentValue) => previousValue + currentValue, 0)
-
-		console.log(`incomes`, incomes)
-		console.log(`expenses`, expenses)
 
 		const newValues = {
 			expense: totalExpense,
@@ -193,6 +198,7 @@ export const useControl = create<ControlsProps>((set) => ({
 						item.transactions = item.transactions.filter(
 							(itemTransaction) => itemTransaction.id !== idTransaction,
 						)
+						state.updateResults(item)
 						return item
 					}
 					return item
