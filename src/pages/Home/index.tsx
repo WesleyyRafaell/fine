@@ -18,9 +18,9 @@ const Home = () => {
 			id: newIdControl,
 			name: 'Novo controle',
 			values: {
-				total: '0',
-				income: '0',
-				expense: '0',
+				total: 0,
+				income: 0,
+				expense: 0,
 			},
 			transactions: [],
 		}

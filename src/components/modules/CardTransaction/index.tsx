@@ -1,23 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import * as S from './style'
 import Image from 'next/image'
 import Input from '../../elements/Input'
 import { useForm } from 'react-hook-form'
-import { useControl } from '@/hooks/useControl'
 import { formatCurrency } from '@/utils/formatCurrency'
 import { RenderCondition } from '@/utils/renderCondition'
 import SmallButton from '@/components/elements/SmallButton'
+import useTransactions from '@/hooks/useTransactions'
+import { Transaction } from '@/types/transaction'
 
 export type TypeCardProps = 'red' | 'green'
 
 export type CardTransactionProps = {
 	idControl: string
 	idTransaction: string
-	name: string
-	value: string
-	type: TypeCardProps
-	visible: boolean
-}
+} & Pick<Transaction, 'name' | 'type' | 'value' | 'visible'>
 
 const containerMotion = {
 	rest: {
@@ -53,12 +50,13 @@ const CardTransaction = ({
 	visible,
 }: CardTransactionProps) => {
 	const [openModal, setOpenModal] = useState(false)
+
 	const {
-		updateTransaction,
-		updateTypeTransaction,
-		updateVisibilityTransaction,
+		setUpdateTransaction,
+		setUpdateTypeTransaction,
+		setUpdateVisibilityTransaction,
 		setDeleteTransaction,
-	} = useControl()
+	} = useTransactions()
 
 	const methods = useForm({
 		defaultValues: {
@@ -73,24 +71,31 @@ const CardTransaction = ({
 	const valueInput = watch('valueEdit')
 
 	const toogleCard = () => {
-		updateVisibilityTransaction(idControl, idTransaction, !visible)
+		setUpdateVisibilityTransaction(idControl, idTransaction, !visible)
 	}
 
-	useEffect(() => {
-		updateTransaction(idControl, idTransaction, 'name', nameInput)
-	}, [idControl, idTransaction, nameInput, updateTransaction])
-
-	useEffect(() => {
-		updateTransaction(idControl, idTransaction, 'value', valueInput)
-	}, [idControl, idTransaction, updateTransaction, valueInput])
-
 	const handleChangeTypeCard = (type: 'red' | 'green') => {
-		updateTypeTransaction(idControl, idTransaction, type)
+		setUpdateTypeTransaction(idControl, idTransaction, type)
 	}
 
 	const handleDelete = () => {
 		setDeleteTransaction(idControl, idTransaction)
 		setOpenModal(false)
+	}
+
+	const handleNameEdit = (value: string) => {
+		setValue('nameEdit', value)
+		setUpdateTransaction(idControl, idTransaction, 'name', value)
+	}
+
+	const handleValueEdit = (value: string) => {
+		setValue('valueEdit', formatCurrency(value))
+		setUpdateTransaction(
+			idControl,
+			idTransaction,
+			'value',
+			formatCurrency(value),
+		)
 	}
 
 	return (
@@ -122,16 +127,14 @@ const CardTransaction = ({
 					<Input
 						name="nameEdit"
 						value={nameInput}
-						onChange={(e) => setValue('nameEdit', e.target.value)}
+						onChange={(e) => handleNameEdit(e.target.value)}
 						error={undefined}
 						inputSize="small"
 					/>
 					<Input
 						name="valueEdit"
 						value={valueInput}
-						onChange={(e) =>
-							setValue('valueEdit', formatCurrency(e.target.value))
-						}
+						onChange={(e) => handleValueEdit(e.target.value)}
 						error={undefined}
 						inputSize="small"
 						money

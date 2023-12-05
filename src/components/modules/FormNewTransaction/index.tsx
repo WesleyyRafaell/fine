@@ -11,6 +11,7 @@ import { useControl } from '@/hooks/useControl'
 import { TypeCardProps } from '../CardTransaction'
 
 import * as S from './style'
+import useTransactions from '@/hooks/useTransactions'
 
 const formNewTransactionSchema = z.object({
 	name: z.string().nonempty('Campo obrigatório'),
@@ -20,7 +21,8 @@ const formNewTransactionSchema = z.object({
 type FormNewTransactionData = z.infer<typeof formNewTransactionSchema>
 
 const FormNewTransaction = () => {
-	const { addNewTransaction, selectedControl } = useControl()
+	const { selectedControl } = useControl()
+	const { setNewTransaction } = useTransactions()
 
 	const form = useRef<HTMLFormElement>(null)
 	const inputType = useRef<HTMLInputElement>(null)
@@ -57,7 +59,7 @@ const FormNewTransaction = () => {
 			...data,
 		}
 
-		addNewTransaction(selectedControl.id, newTransaction)
+		setNewTransaction(selectedControl.id, newTransaction)
 
 		reset({
 			name: '',
