@@ -1,9 +1,15 @@
+import {
+	deleteControlStorage,
+	getControlLocalStorage,
+	setControlLocalStorage,
+	updateControlLocalStorage,
+} from '@/functions/controlsLocalStorage'
 import { Control } from '@/types/control'
 import { create } from 'zustand'
 
 type ControlsProps = {
 	controls: Control[]
-	selectedControl: Control
+	selectedControl: Control | null
 
 	addControl: (control: Control) => void
 	updateControl: (controls: Control[]) => void
@@ -14,23 +20,15 @@ type ControlsProps = {
 }
 
 export const useControl = create<ControlsProps>((set) => ({
-	controls: [],
-	selectedControl: {
-		id: '',
-		name: '',
-		values: {
-			total: 0,
-			income: 0,
-			expense: 0,
-		},
-		transactions: [],
-	},
+	controls: getControlLocalStorage() || [],
+	selectedControl: null,
 	setSelectedControl: (id) => {
 		set((state) => ({
 			selectedControl: state.controls.filter((item) => item.id === id)[0],
 		}))
 	},
 	addControl: (control: Control) => {
+		setControlLocalStorage(control)
 		set((state) => ({
 			controls: [
 				...state.controls,
@@ -88,9 +86,11 @@ export const useControl = create<ControlsProps>((set) => ({
 			values: newValues,
 		}
 
+		updateControlLocalStorage(newSelectedControl)
 		set({ selectedControl: newSelectedControl })
 	},
 	setDeleteControl: (idControl) => {
+		deleteControlStorage(idControl)
 		set((state) => ({
 			selectedControl: state.controls[0],
 			controls: [...state.controls.filter((item) => item.id !== idControl)],
