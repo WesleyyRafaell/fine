@@ -113,11 +113,12 @@ export const Text = styled.p`
 	`}
 `
 export const WrapperModal = styled.div`
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	background: #00000069;
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
