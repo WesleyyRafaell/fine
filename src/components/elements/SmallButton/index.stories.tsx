@@ -8,12 +8,12 @@ const meta: Meta<typeof SmallButton> = {
 	argTypes: {
 		color: {
 			options: ['red', 'green'],
-			control: { type: 'radio' }
-		}
+			control: { type: 'radio' },
+		},
 	},
 	args: {
-		children: 'Receita'
-	}
+		children: 'Receita',
+	},
 }
 
 export default meta

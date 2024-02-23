@@ -18,14 +18,14 @@ describe('<CardTransaction />', () => {
 		const card = screen.getByTestId('card')
 
 		expect(card).toHaveStyle({
-			height: '9.1rem'
+			height: '9.1rem',
 		})
 
 		userEvent.hover(card)
 
 		await waitFor(() => {
 			expect(card).toHaveStyle({
-				height: '15rem'
+				height: '15rem',
 			})
 		})
 	})
@@ -36,14 +36,14 @@ describe('<CardTransaction />', () => {
 		const cardType = screen.getByTestId('cardType')
 
 		expect(cardType).toHaveStyle({
-			'background-color': '#21BE3A'
+			'background-color': '#21BE3A',
 		})
 
 		fireEvent.click(screen.getByTestId('buttonRed'))
 
 		await waitFor(() => {
 			expect(cardType).toHaveStyle({
-				'background-color': '#DD4747'
+				'background-color': '#DD4747',
 			})
 		})
 	})
@@ -54,14 +54,14 @@ describe('<CardTransaction />', () => {
 		const cardType = screen.getByTestId('cardType')
 
 		expect(cardType).toHaveStyle({
-			'background-color': '#21BE3A'
+			'background-color': '#21BE3A',
 		})
 
 		fireEvent.click(screen.getByTestId('buttonRed'))
 
 		await waitFor(() => {
 			expect(cardType).toHaveStyle({
-				'background-color': '#DD4747'
+				'background-color': '#DD4747',
 			})
 		})
 
@@ -69,7 +69,7 @@ describe('<CardTransaction />', () => {
 
 		await waitFor(() => {
 			expect(cardType).toHaveStyle({
-				'background-color': '#21BE3A'
+				'background-color': '#21BE3A',
 			})
 		})
 	})
@@ -80,13 +80,13 @@ describe('<CardTransaction />', () => {
 		const card = screen.getByTestId('card')
 
 		expect(card).toHaveStyle({
-			'background-color': '#757EFF'
+			'background-color': '#757EFF',
 		})
 
 		fireEvent.click(screen.getByTestId('buttonDisableCard'))
 
 		expect(card).toHaveStyle({
-			'background-color': '#5f65c5'
+			'background-color': '#5f65c5',
 		})
 	})
 })

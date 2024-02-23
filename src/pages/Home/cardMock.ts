@@ -1,17 +1,17 @@
 export default [
 	{
-		name: 'Janeiro'
+		name: 'Janeiro',
 	},
 	{
-		name: 'Feveiro'
+		name: 'Feveiro',
 	},
 	{
-		name: 'Marco'
+		name: 'Marco',
 	},
 	{
-		name: 'Abril'
+		name: 'Abril',
 	},
 	{
-		name: 'Maio'
-	}
+		name: 'Maio',
+	},
 ]

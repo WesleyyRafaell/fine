@@ -6,8 +6,8 @@ const meta: Meta<typeof ControlContainer> = {
 	title: 'ControlContainer',
 	component: ControlContainer,
 	parameters: {
-		backgrounds: { default: 'dark' }
-	}
+		backgrounds: { default: 'dark' },
+	},
 }
 
 export default meta

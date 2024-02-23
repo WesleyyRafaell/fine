@@ -6,8 +6,8 @@ const meta: Meta<typeof DisplayResults> = {
 	title: 'DisplayResults',
 	component: DisplayResults,
 	parameters: {
-		backgrounds: { default: 'dark' }
-	}
+		backgrounds: { default: 'dark' },
+	},
 }
 
 export default meta
@@ -18,6 +18,6 @@ export const Default: Story = {
 	args: {
 		total: '600',
 		income: '900',
-		expense: '300'
-	}
+		expense: '300',
+	},
 }

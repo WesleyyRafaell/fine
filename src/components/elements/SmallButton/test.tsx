@@ -9,7 +9,7 @@ describe('Name of the group', () => {
 
 		expect(screen.getByRole('button', { name: /Receita/i })).toBeInTheDocument()
 		expect(screen.getByRole('button', { name: /Receita/i })).toHaveStyle({
-			background: '#21BE3A'
+			background: '#21BE3A',
 		})
 	})
 
@@ -18,7 +18,7 @@ describe('Name of the group', () => {
 
 		expect(screen.getByRole('button', { name: /Receita/i })).toBeInTheDocument()
 		expect(screen.getByRole('button', { name: /Receita/i })).toHaveStyle({
-			background: '#DD4747'
+			background: '#DD4747',
 		})
 	})
 })

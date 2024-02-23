@@ -4,7 +4,7 @@ import FormNewTransaction from '.'
 
 const meta: Meta<typeof FormNewTransaction> = {
 	title: 'FormNewTransaction',
-	component: FormNewTransaction
+	component: FormNewTransaction,
 }
 
 export default meta

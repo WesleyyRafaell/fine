@@ -8,7 +8,7 @@ describe('NPage Home', () => {
 		renderWithTheme(<Home />)
 
 		expect(
-			screen.getByRole('button', { name: /Novo controle/i })
+			screen.getByRole('button', { name: /Novo controle/i }),
 		).toBeInTheDocument()
 		expect(screen.getByRole('button', { name: /receita/i })).toBeInTheDocument()
 		expect(screen.getByRole('button', { name: /despesa/i })).toBeInTheDocument()

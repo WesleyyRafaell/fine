@@ -7,7 +7,7 @@ interface RenderConditionProps {
 
 export const RenderCondition: FC<RenderConditionProps> = ({
 	children,
-	condition
+	condition,
 }) => {
 	return condition ? <>{children}</> : <></>
 }

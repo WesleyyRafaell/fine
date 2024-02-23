@@ -12,14 +12,14 @@ describe('<Card />', () => {
 
 		expect(CardElement).toBeInTheDocument()
 		expect(CardElement).toHaveStyle({
-			height: '81px'
+			height: '81px',
 		})
 
 		userEvent.hover(CardElement)
 
 		await waitFor(() => {
 			expect(CardElement).toHaveStyle({
-				height: '109px'
+				height: '109px',
 			})
 		})
 	})
@@ -29,14 +29,14 @@ describe('<Card />', () => {
 
 		const IconElement = screen.getByTestId('ContainerIcon')
 		expect(IconElement).toHaveStyle({
-			opacity: '0'
+			opacity: '0',
 		})
 
 		userEvent.hover(IconElement)
 
 		await waitFor(() => {
 			expect(IconElement).toHaveStyle({
-				opacity: '1'
+				opacity: '1',
 			})
 		})
 	})

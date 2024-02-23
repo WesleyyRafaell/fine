@@ -8,12 +8,12 @@ const meta: Meta<typeof ResultIndicator> = {
 	argTypes: {
 		moneySignColor: {
 			options: ['red', 'green', 'orange'],
-			control: { type: 'radio' }
-		}
+			control: { type: 'radio' },
+		},
 	},
 	parameters: {
-		backgrounds: { default: 'dark' }
-	}
+		backgrounds: { default: 'dark' },
+	},
 }
 
 export default meta
@@ -22,6 +22,6 @@ type Story = StoryObj<typeof ResultIndicator>
 
 export const Default: Story = {
 	args: {
-		total: '905'
-	}
+		total: '905',
+	},
 }
