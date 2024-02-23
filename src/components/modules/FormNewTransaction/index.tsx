@@ -59,6 +59,7 @@ const FormNewTransaction = () => {
 			...data,
 		}
 
+		if (!selectedControl) return
 		setNewTransaction(selectedControl.id, newTransaction)
 
 		reset({

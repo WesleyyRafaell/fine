@@ -22,6 +22,7 @@ const DisplayResults = ({ initialValue }: DisplayResultsProps) => {
 	const inputName = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
+		if (!selectedControl) return
 		updateNameControl(selectedControl.id, selectedNameInput)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedNameInput])
@@ -31,11 +32,13 @@ const DisplayResults = ({ initialValue }: DisplayResultsProps) => {
 	}, [initialValue])
 
 	const cleanNameInput = () => {
+		if (!selectedControl) return
 		updateNameControl(selectedControl.id, '')
 		inputName?.current?.focus()
 	}
 
 	useEffect(() => {
+		if (!selectedControl) return
 		setValues(selectedControl.values)
 	}, [selectedControl])
 

@@ -22,6 +22,6 @@ type Story = StoryObj<typeof ResultIndicator>
 
 export const Default: Story = {
 	args: {
-		total: '905',
+		total: 905,
 	},
 }

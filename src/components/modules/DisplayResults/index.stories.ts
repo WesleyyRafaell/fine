@@ -14,10 +14,4 @@ export default meta
 
 type Story = StoryObj<typeof DisplayResults>
 
-export const Default: Story = {
-	args: {
-		total: '600',
-		income: '900',
-		expense: '300',
-	},
-}
+export const Default: Story = {}
