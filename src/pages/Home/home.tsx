@@ -6,7 +6,7 @@ import ControlContainer from '@/components/modules/ControlContainer'
 import { useControl } from '@/hooks/useControl'
 import { RenderCondition } from '@/utils/renderCondition'
 
-import * as S from './style'
+import * as S from '../../containers/Home/style'
 
 const Home = () => {
 	const { controls, selectedControl, addControl, setSelectedControl } =
@@ -36,7 +36,7 @@ const Home = () => {
 				<S.Box>
 					<Button passFunction={newControl}>Novo controle</Button>
 					<S.CardsContainer>
-						{controls?.map((item) => (
+						{controls?.map((item: any) => (
 							<Card key={item.id} id={item.id} name={item.name} />
 						))}
 					</S.CardsContainer>

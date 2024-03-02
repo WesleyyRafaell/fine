@@ -1,7 +1,7 @@
-import { ThemeProvider } from 'styled-components'
-import { render, RenderResult } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import theme from '@/styles/theme'
+// import { ThemeProvider } from 'styled-components'
+// import { render, RenderResult } from '@testing-library/react'
+// import '@testing-library/jest-dom'
+// import theme from '@/styles/theme'
 
-export const renderWithTheme = (children: React.ReactNode): RenderResult =>
-	render(<ThemeProvider theme={theme}> {children} </ThemeProvider>)
+// export const renderWithTheme = (children: React.ReactNode): RenderResult =>
+// 	render(<ThemeProvider theme={theme}> {children} </ThemeProvider>)
